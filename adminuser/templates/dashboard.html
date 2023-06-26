@@ -1,0 +1,76 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Ticketzz</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+    <link href="{% static 'bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'bootstrap-icons.css' %}" rel="stylesheet">
+    <link href="{% static 'home.css' %}" rel="stylesheet">
+</head>
+
+<body>
+        <h2>Flights:</h2>
+{% if flights %}
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th scope="col">Flight Number</th>
+            <th scope="col">Flight Name</th>
+            <th scope="col">Departure Date</th>
+            <th scope="col">Departure Location</th>
+            <th scope="col">Departure Time</th>
+            <th scope="col">Arrival Date</th>
+            <th scope="col">Arrival Location</th>
+            <th scope="col">Arrival Time</th>
+            <th scope="col">Seat Count</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for flight in flights %}
+        <tr>
+            <td scope="row">{{ flight.flight_number }}</td>
+            <td>{{ flight.flight_name }}</td>
+            <td>{{ flight.depart_date }}</td>
+            <td>{{ flight.depart_loc }}</td>
+            <td>{{ flight.depart_time }}</td>
+            <td>{{ flight.arrival_date }}</td>
+            <td>{{ flight.arrival_loc }}</td>
+            <td>{{ flight.arrival_time }}</td>
+            <td>{{ flight.total_seats }}</td>  
+            <td> 
+                <a href="{% url 'delete_flight' flight.flight_id %}" class="btn btn-danger">Delete</a>               
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="/panel/admadd" class="btn btn-success">Add Flights</a>
+{% else %}
+<a href="/panel/admadd" class="btn btn-success">Add Flights</a>
+<p>No flights available.</p>
+{% endif %}
+
+
+    </main>
+    <script src="{% static 'jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'jquery.sticky.js' %}"></script>
+    <script src="{% static 'click-scroll.js' %}"></script>
+    <script src="{% static 'custom.js' %}"></script>
+
+</body>
+
+</html>

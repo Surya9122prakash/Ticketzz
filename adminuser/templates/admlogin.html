@@ -1,0 +1,92 @@
+{% load socialaccount %}
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Ticketzz</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+    <link href="{% static 'bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'bootstrap-icons.css' %}" rel="stylesheet">
+    <link href="{% static 'home.css' %}" rel="stylesheet">
+</head>
+
+<body>
+    <main>
+        <section class="hero-section" id="section_1">
+            <div class="section-overlay"></div>
+
+            <div class="container d-flex justify-content-center align-items-center">
+                <div class="row">
+
+                    <div class="col-12 mt-auto mb-5 text-center">
+                        <small>Welcome To Ticketzz</small>
+
+                        <h1 class="text-white mb-5">Manage the Flights</h1>
+
+                        <a class="btn custom-btn smoothscroll" href="/panel/admsignup">Get Started</a>
+                    </div>
+                </div>
+            </div>
+            <div class="video-wrap">
+                <video autoplay="" loop="" muted="" class="custom-video" poster="">
+                    <source src="{% static 'loginadm.mp4' %}" type="video/mp4">
+
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </section>
+        <section class="vh-100" style="background-color: white; color:black;">
+  <form action="/panel/admlogin" method="POST">
+    {% csrf_token %}
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card shadow-2-strong" style="border-radius: 1rem;">
+          <div class="card-body p-5 text-center">
+            <h3 class="mb-5">Sign in</h3>
+            {% for message in messages %}
+            <div class="alert alert-{{message.tags}}" role="alert">
+                {{message}}
+            </div>
+            {% endfor %}
+            <div class="form-outline mb-4">
+              <input type="text" id="typeEmailX-2" class="form-control form-control-lg" name="name" required/>
+              <label class="form-label" for="typeEmailX-2">Name</label>
+            </div>
+
+            <div class="form-outline mb-4">
+              <input type="password" id="typePasswordX-2" class="form-control form-control-lg" name="pass1" required/>
+              <label class="form-label" for="typePasswordX-2">Password</label>
+            </div>
+
+            <button class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
+            <hr/>
+            <p>Not a User? <a href="/panel/admsignup">Signup</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </form>
+</section>
+    </main>
+    <script src="{% static 'jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'jquery.sticky.js' %}"></script>
+    <script src="{% static 'click-scroll.js' %}"></script>
+    <script src="{% static 'custom.js' %}"></script>
+
+</body>
+
+</html>

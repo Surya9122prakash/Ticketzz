@@ -1,0 +1,131 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Ticketzz</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+    <link href="{% static 'bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'bootstrap-icons.css' %}" rel="stylesheet">
+    <link href="{% static 'home.css' %}" rel="stylesheet">
+</head>
+
+<body>
+    <main>
+        <section class="hero-section" id="section_1" style="background-color: aliceblue;">
+            <div class="section-overlay"></div>
+
+            <div class="container d-flex justify-content-center align-items-center">
+                <div class="row">
+
+                    <div class="col-12 mt-auto mb-5 text-center">
+                        <small>Ticketzz Booking</small>
+
+                        <h1 class="text-white mb-5">Book Your Journey Here</h1>
+
+                        <a class="btn custom-btn smoothscroll" href="#section_2">Get Started</a>
+                    </div>
+                </div>
+            </div>
+            <div class="video-wrap">
+                <video autoplay="" loop="" muted="" class="custom-video" poster="">
+                    <source src="{% static 'video.mp4' %}" type="video/mp4">
+
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </section>
+        <section class="hero-section" id="section_2">
+            <form action="/booking" method="POST">
+                {% csrf_token %}
+                <div class="form-outline mb-4">
+                    <label class="form-label" for="typeEmailX-2">Departure Date</label>
+                    <input type="date" id="typeEmailX-2" class="form-control form-control-lg" name="depdate" required/>
+                </div>
+                <div class="form-outline mb-4">
+                    <label class="form-label" for="typeEmailX-2">Departure Time</label>
+                    <input type="time" id="typeEmailX-2" class="form-control form-control-lg" name="deptime" required/>
+                </div>
+                <div class="form-outline mb-4">
+                    <label class="form-label" for="typeEmailX-2">Arrival Date</label>
+                    <input type="date" id="typeEmailX-2" class="form-control form-control-lg" name="arrdate" required/>
+                </div> 
+                <div class="form-outline mb-4">
+                    <label class="form-label" for="typeEmailX-2">Arrival Time</label>
+                    <input type="time" id="typeEmailX-2" class="form-control form-control-lg" name="arrtime" required/>
+                </div> 
+                <button class="btn btn-primary" type="submit">Search Flights</button>
+            </form>
+        </section>
+        <section class = "about-section">
+            <h2>Flights:</h2>
+{% if flights %}
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th scope="col">Logo</th>
+            <th scope="col">Flight Number</th>
+            <th scope="col">Flight Name</th>
+            <th scope="col">Departure Date</th>
+            <th scope="col">Departure Location</th>
+            <th scope="col">Departure Time</th>
+            <th scope="col">Arrival Date</th>
+            <th scope="col">Arrival Location</th>
+            <th scope="col">Arrival Time</th>
+            <th scope="col">Seats Remaining</th>
+            <th scope="col">Booking</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for message in messages %}
+            <div class="alert alert-{{message.tags}}" role="alert">
+                {{message}}
+            </div>
+        {% endfor %}
+        {% for flight in flights %}
+        <tr>
+            <td><img src="{{ flight.logo }}" alt="Logo" width="50" height="50"></td>
+            <td scope="row">{{ flight.flight_number }}</td>
+            <td>{{ flight.flight_name }}</td>
+            <td>{{ flight.depart_date }}</td>
+            <td>{{ flight.depart_loc }}</td>
+            <td>{{ flight.depart_time }}</td>
+            <td>{{ flight.arrival_date }}</td>
+            <td>{{ flight.arrival_loc }}</td>
+            <td>{{ flight.arrival_time }}</td>
+            <td>{{ flight.total_seats }}</td>
+            <td>
+                <form action="{% url 'book_flight' flight.flight_id %}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-primary">Book</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>No flights available.</p>
+{% endif %}
+
+        </section>
+    </main>
+    <script src="{% static 'jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'jquery.sticky.js' %}"></script>
+    <script src="{% static 'click-scroll.js' %}"></script>
+    <script src="{% static 'custom.js' %}"></script>
+
+</body>
+
+</html>

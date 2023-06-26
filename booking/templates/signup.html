@@ -1,0 +1,101 @@
+{% load socialaccount %}
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Ticketzz</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+    <link href="{% static 'bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'bootstrap-icons.css' %}" rel="stylesheet">
+    <link href="{% static 'home.css' %}" rel="stylesheet">
+</head>
+
+<body>
+    <main>
+        <section class="hero-section" id="section_1">
+            <div class="section-overlay"></div>
+
+            <div class="container d-flex justify-content-center align-items-center">
+                <div class="row">
+
+                    <div class="col-12 mt-auto mb-5 text-center">
+                        <small>Ticketzz Booking</small>
+
+                        <h1 class="text-white mb-5">Book Your Journey Here</h1>
+
+                        <a class="btn custom-btn smoothscroll" href="#section_2">Get Started</a>
+                    </div>
+                </div>
+            </div>
+            <div class="video-wrap">
+                <video autoplay="" loop="" muted="" class="custom-video" poster="">
+                    <source src="{% static 'svideo.mp4' %}" type="video/mp4">
+
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </section>
+        <section class="vh-100" style="background-color: white; color:black;">
+            <form action="/signup" method="POST">
+                {% csrf_token %}
+                <div class="container py-5 h-100">
+                    <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                        <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                        <div class="card-body p-5 text-center">
+                            <h3 class="mb-5">Sign Up</h3>
+                            {% for message in messages %}
+                            <div class="alert alert-{{message.tags}}" role="alert">
+                                {{message}}
+                            </div>
+                            {% endfor %}
+                            <div class="form-outline mb-4">
+                                <input type="text" id="typeEmailX-2" class="form-control form-control-lg" name="name" required/>
+                                <label class="form-label" for="typeEmailX-2">Name</label>
+                            </div> 
+                            <div class="form-outline mb-4">
+                            <input type="email" id="typeEmailX-2" class="form-control form-control-lg" name="email" required/>
+                            <label class="form-label" for="typeEmailX-2">Email</label>
+                            </div>
+                            <div class="form-outline mb-4">
+                            <input type="password" id="typePasswordX-2" class="form-control form-control-lg" name="pass1" required/>
+                            <label class="form-label" for="typePasswordX-2">Password</label>
+                            </div>
+                            <div class="form-outline mb-4">
+                                <input type="password" id="typePasswordX-2" class="form-control form-control-lg" name="pass2" required/>
+                                <label class="form-label" for="typePasswordX-2">Confirm Password</label>
+                            </div>
+                            <button class="btn btn-primary btn-lg btn-block" type="submit">Sign Up</button>
+                            <hr/>
+                            <p class="text-center mt-2">OR</p>
+                            <a class="btn btn-sm btn-block btn-light mt-2" id="gp" href="{% provider_login_url 'google' %}">Login With <img src="https://img.icons8.com/color/30/000000/google-logo.png"/></a><br>
+                            <a class="btn btn-sm btn-block btn-light mt-2" id="gp" href="{% provider_login_url 'github' %}">Login With <img width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/github.png" alt="github"/></a><br>
+                            <p>Already a User? <a href="/panel/admlogin">Login</a></p>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </form>
+        </section>
+    </main>
+    <script src="{% static 'jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'jquery.sticky.js' %}"></script>
+    <script src="{% static 'click-scroll.js' %}"></script>
+    <script src="{% static 'custom.js' %}"></script>
+
+</body>
+
+</html>

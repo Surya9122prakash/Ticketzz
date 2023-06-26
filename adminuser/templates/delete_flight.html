@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<h2>Delete Flight</h2>
+<p>Are you sure you want to delete the following flight?</p>
+<table class="table table-bordered">
+    <tr>
+        <th scope="col">Flight Number</th>
+        <th scope="col">Flight Name</th>
+        <th scope="col">Departure Date</th>
+        <th scope="col">Departure Location</th>
+        <th scope="col">Departure Time</th>
+        <th scope="col">Arrival Date</th>
+        <th scope="col">Arrival Location</th>
+        <th scope="col">Arrival Time</th>
+    </tr>
+    <tr>
+        <td>{{ flight.flight_number }}</td>
+        <td>{{ flight.flight_name }}</td>
+        <td>{{ flight.depart_date }}</td>
+        <td>{{ flight.depart_loc }}</td>
+        <td>{{ flight.depart_time }}</td>
+        <td>{{ flight.arrival_date }}</td>
+        <td>{{ flight.arrival_loc }}</td>
+        <td>{{ flight.arrival_time }}</td>
+    </tr>
+</table>
+<form method="post" action="{% url 'delete_flight' flight.flight_id %}">
+  {% csrf_token %}
+  <button type="submit" class="btn btn-danger">Delete</button>
+  <a href="{% url 'dashboard' %}" class="btn btn-secondary">Cancel</a>
+</form>
+
+</body>
+</html>

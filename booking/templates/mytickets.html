@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="table-bordered">
+        <h2>My Tickets</h2>
+{% if bookings %}
+<table class="table table-bordered">
+<thead>
+<tr>
+    <th scope="col">Flight Logo</th>
+    <th scope="col">Flight Number</th>
+    <th scope="col">Flight Name</th>
+    <th scope="col">Departure Location</th>
+    <th scope="col">Departure Date</th>
+    <th scope="col">Departure Time</th>
+    <th scope="col">Arrival Location</th>
+    <th scope="col">Arrival Date</th>
+    <th scope="col">Arrival Time</th>
+    <th scope="col">Booking Timestamp</th>
+</tr>
+</thead>
+<tbody>
+{% for booking in bookings %}
+    <tr>
+        <td>{{ booking.booked_flight.logo }}</td>
+        <td scope="row">{{ booking.booked_flight.flight_number }}</td>
+        <td>{{ booking.booked_flight.flight_name }}</td>
+        <td>{{ booking.booked_flight.depart_loc }}</td>
+        <td>{{ booking.booked_flight.depart_date }}</td>
+        <td>{{ booking.booked_flight.depart_time }}</td>
+        <td>{{ booking.booked_flight.arrival_loc }}</td>
+        <td>{{ booking.booked_flight.arrival_date }}</td>
+        <td>{{ booking.booked_flight.arrival_time }}</td>
+        <td>{{ booking.timestamp }}</td>
+    </tr>
+{% endfor %}
+</tbody>
+</table>
+{% else %}
+<p>No tickets booked.</p>
+{% endif %}
+    </div>
+</body>
+</html>
